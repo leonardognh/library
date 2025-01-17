@@ -1,31 +1,6 @@
 # Library NodeJS API
 
----
-
-title: Livraria API v1.0.0
-language_tabs:
-
-- shell: Shell
-- http: HTTP
-- javascript: JavaScript
-- ruby: Ruby
-- python: Python
-- php: PHP
-- java: Java
-- go: Go
-  toc_footers: []
-  includes: []
-  search: true
-  highlight_theme: darkula
-  headingLevel: 2
-
----
-
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="livraria-api">Livraria API v1.0.0</h1>
-
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+<h1 id="livraria-api">Livraria API</h1>
 
 API para gerenciar uma livraria.
 
@@ -42,7 +17,7 @@ Operações relacionadas a livros
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/books \
   -H 'Accept: application/json'
 
@@ -244,7 +219,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/books \
   -H 'Content-Type: application/json'
 
@@ -429,7 +404,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/books/{id} \
   -H 'Accept: application/json'
 
@@ -604,7 +579,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/books/{id} \
   -H 'Content-Type: application/json'
 
@@ -791,7 +766,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/books/{id}
 
 ```
@@ -928,7 +903,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/books/authors?authorIds=auth1%2Cauth2 \
   -H 'Accept: application/json'
 
@@ -1134,7 +1109,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/books/categories?categoryIds=cat1%2Ccat2 \
   -H 'Accept: application/json'
 
@@ -1344,7 +1319,7 @@ Operações relacionadas a autores
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/authors \
   -H 'Accept: application/json'
 
@@ -1538,7 +1513,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/authors \
   -H 'Content-Type: application/json'
 
@@ -1711,7 +1686,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/authors/{id} \
   -H 'Accept: application/json'
 
@@ -1882,7 +1857,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/authors/{id} \
   -H 'Content-Type: application/json'
 
@@ -2057,7 +2032,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/authors/{id}
 
 ```
@@ -2198,7 +2173,7 @@ Operações relacionadas a categorias
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/categories \
   -H 'Accept: application/json'
 
@@ -2392,7 +2367,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/categories \
   -H 'Content-Type: application/json'
 
@@ -2565,7 +2540,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/categories/{id} \
   -H 'Accept: application/json'
 
@@ -2736,7 +2711,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/categories/{id} \
   -H 'Content-Type: application/json'
 
@@ -2911,7 +2886,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/categories/{id}
 
 ```
@@ -3052,7 +3027,7 @@ Operações relacionadas a clientes
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/customers \
   -H 'Accept: application/json'
 
@@ -3250,7 +3225,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/customers \
   -H 'Content-Type: application/json'
 
@@ -3427,7 +3402,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/customers/{id} \
   -H 'Accept: application/json'
 
@@ -3600,7 +3575,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/customers/{id} \
   -H 'Content-Type: application/json'
 
@@ -3779,7 +3754,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/customers/{id}
 
 ```
@@ -3920,7 +3895,7 @@ Operações relacionadas a vendas
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/sales \
   -H 'Accept: application/json'
 
@@ -4118,7 +4093,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/sales \
   -H 'Content-Type: application/json'
 
@@ -4295,7 +4270,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/sales/{id} \
   -H 'Accept: application/json'
 
@@ -4468,7 +4443,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/sales/{id} \
   -H 'Content-Type: application/json'
 
@@ -4647,7 +4622,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/sales/{id}
 
 ```
@@ -4788,7 +4763,7 @@ Operações relacionadas a itens de vendas
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/itemsales \
   -H 'Accept: application/json'
 
@@ -4988,7 +4963,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X POST http://localhost:3000/itemsales \
   -H 'Content-Type: application/json'
 
@@ -5167,7 +5142,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X GET http://localhost:3000/itemsales/{id} \
   -H 'Accept: application/json'
 
@@ -5341,7 +5316,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X PUT http://localhost:3000/itemsales/{id} \
   -H 'Content-Type: application/json'
 
@@ -5522,7 +5497,7 @@ This operation does not require authentication
 > Code samples
 
 ```shell
-# You can also use wget
+
 curl -X DELETE http://localhost:3000/itemsales/{id}
 
 ```
@@ -5657,7 +5632,6 @@ This operation does not require authentication
 # Schemas
 
 <h2 id="tocS_Book">Book</h2>
-<!-- backwards compatibility -->
 <a id="schemabook"></a>
 <a id="schema_Book"></a>
 <a id="tocSbook"></a>
@@ -5686,7 +5660,6 @@ This operation does not require authentication
 | authors    | [string] | false    | none         | none        |
 
 <h2 id="tocS_Author">Author</h2>
-<!-- backwards compatibility -->
 <a id="schemaauthor"></a>
 <a id="schema_Author"></a>
 <a id="tocSauthor"></a>
@@ -5707,7 +5680,6 @@ This operation does not require authentication
 | name | string | false    | none         | none        |
 
 <h2 id="tocS_Category">Category</h2>
-<!-- backwards compatibility -->
 <a id="schemacategory"></a>
 <a id="schema_Category"></a>
 <a id="tocScategory"></a>
@@ -5728,7 +5700,6 @@ This operation does not require authentication
 | description | string | false    | none         | none        |
 
 <h2 id="tocS_Customer">Customer</h2>
-<!-- backwards compatibility -->
 <a id="schemacustomer"></a>
 <a id="schema_Customer"></a>
 <a id="tocScustomer"></a>
@@ -5753,7 +5724,6 @@ This operation does not require authentication
 | phone | string | false    | none         | none        |
 
 <h2 id="tocS_Sale">Sale</h2>
-<!-- backwards compatibility -->
 <a id="schemasale"></a>
 <a id="schema_Sale"></a>
 <a id="tocSsale"></a>
@@ -5778,7 +5748,6 @@ This operation does not require authentication
 | total      | number            | false    | none         | none        |
 
 <h2 id="tocS_ItemSale">ItemSale</h2>
-<!-- backwards compatibility -->
 <a id="schemaitemsale"></a>
 <a id="schema_ItemSale"></a>
 <a id="tocSitemsale"></a>
