@@ -1,0 +1,1343 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Livraria API",
+    "version": "1.0.0",
+    "description": "API para gerenciar uma livraria."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Books",
+      "description": "Operações relacionadas a livros"
+    },
+    {
+      "name": "Authors",
+      "description": "Operações relacionadas a autores"
+    },
+    {
+      "name": "Categories",
+      "description": "Operações relacionadas a categorias"
+    },
+    {
+      "name": "Customers",
+      "description": "Operações relacionadas a clientes"
+    },
+    {
+      "name": "Sales",
+      "description": "Operações relacionadas a vendas"
+    },
+    {
+      "name": "ItemSales",
+      "description": "Operações relacionadas a itens de vendas"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "tags": ["Books"],
+        "summary": "Obter todos os livros",
+        "description": "Retorna uma lista de todos os livros disponíveis",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de livros",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Book"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Books"],
+        "summary": "Criar um livro",
+        "description": "Adiciona um novo livro à livraria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Livro criado"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": ["Books"],
+        "summary": "Obter um livro por ID",
+        "description": "Retorna os detalhes de um livro específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do livro",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do livro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Books"],
+        "summary": "Atualizar um livro",
+        "description": "Atualiza os detalhes de um livro específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do livro",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Livro atualizado"
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Books"],
+        "summary": "Excluir um livro",
+        "description": "Remove um livro específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do livro",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro excluído"
+          },
+          "404": {
+            "description": "Livro não encontrado"
+          }
+        }
+      }
+    },
+    "/books/authors": {
+      "get": {
+        "tags": ["Books"],
+        "summary": "Obter todos os livros por múltiplos autores com paginação",
+        "description": "Retorna uma lista de livros por múltiplos autores com suporte à paginação",
+        "parameters": [
+          {
+            "name": "authorIds",
+            "in": "query",
+            "required": true,
+            "description": "Lista de IDs de autores separados por vírgula",
+            "schema": {
+              "type": "string",
+              "example": "auth1,auth2"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de livros do autor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Book"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/categories": {
+      "get": {
+        "tags": ["Books"],
+        "summary": "Obter todos os livros por múltiplas categorias com paginação",
+        "description": "Retorna uma lista de livros por múltiplas categorias com suporte à paginação",
+        "parameters": [
+          {
+            "name": "categoryIds",
+            "in": "query",
+            "required": true,
+            "description": "Lista de IDs de categorias separados por vírgula",
+            "schema": {
+              "type": "string",
+              "example": "cat1,cat2"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de livros da categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Book"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/authors": {
+      "get": {
+        "tags": ["Authors"],
+        "summary": "Obter todos os autores",
+        "description": "Retorna uma lista de todos os autores cadastrados",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de autores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Author"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Authors"],
+        "summary": "Criar um autor",
+        "description": "Adiciona um novo autor ao sistema",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Autor criado"
+          }
+        }
+      }
+    },
+    "/authors/{id}": {
+      "get": {
+        "tags": ["Authors"],
+        "summary": "Obter um autor por ID",
+        "description": "Retorna os detalhes de um autor específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do autor",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do autor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Author"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Autor não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Authors"],
+        "summary": "Atualizar um autor",
+        "description": "Atualiza os detalhes de um autor específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do autor",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autor atualizado"
+          },
+          "404": {
+            "description": "Autor não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Authors"],
+        "summary": "Excluir um autor",
+        "description": "Remove um autor específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do autor",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Autor excluído"
+          },
+          "404": {
+            "description": "Autor não encontrado"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Obter todas as categorias",
+        "description": "Retorna uma lista de todas as categorias cadastradas",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de categorias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Criar uma categoria",
+        "description": "Adiciona uma nova categoria ao sistema",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Categoria criada"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Obter uma categoria por ID",
+        "description": "Retorna os detalhes de uma categoria específica pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da categoria",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Categories"],
+        "summary": "Atualizar uma categoria",
+        "description": "Atualiza os detalhes de uma categoria específica pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da categoria",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Categoria atualizada"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Excluir uma categoria",
+        "description": "Remove uma categoria específica pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da categoria",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoria excluída"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Obter todos os clientes",
+        "description": "Retorna uma lista de todos os clientes cadastrados",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de clientes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Customer"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Customers"],
+        "summary": "Criar um cliente",
+        "description": "Adiciona um novo cliente ao sistema",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cliente criado"
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Obter um cliente por ID",
+        "description": "Retorna os detalhes de um cliente específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do cliente",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do cliente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Customers"],
+        "summary": "Atualizar um cliente",
+        "description": "Atualiza os detalhes de um cliente específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do cliente",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cliente atualizado"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Customers"],
+        "summary": "Excluir um cliente",
+        "description": "Remove um cliente específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do cliente",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente excluído"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+    "/sales": {
+      "get": {
+        "tags": ["Sales"],
+        "summary": "Obter todas as vendas",
+        "description": "Retorna uma lista de todas as vendas realizadas",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de vendas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Sale"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sales"],
+        "summary": "Criar uma venda",
+        "description": "Registra uma nova venda",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Venda criada"
+          }
+        }
+      }
+    },
+    "/sales/{id}": {
+      "get": {
+        "tags": ["Sales"],
+        "summary": "Obter uma venda por ID",
+        "description": "Retorna os detalhes de uma venda específica pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da venda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Venda não encontrada"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Sales"],
+        "summary": "Atualizar uma venda",
+        "description": "Atualiza os detalhes de uma venda específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Venda atualizado"
+          },
+          "404": {
+            "description": "Venda não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Sales"],
+        "summary": "Excluir de venda",
+        "description": "Remove de venda específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID de venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Venda excluído"
+          },
+          "404": {
+            "description": "Venda não encontrado"
+          }
+        }
+      }
+    },
+
+    "/itemsales": {
+      "get": {
+        "tags": ["ItemSales"],
+        "summary": "Obter todos os itens de vendas",
+        "description": "Retorna uma lista de todos os itens de vendas",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Número da página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Quantidade de itens por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de itens de vendas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ItemSale"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["ItemSales"],
+        "summary": "Criar um item de venda",
+        "description": "Registra um novo item de venda",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemSale"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item de venda criado"
+          }
+        }
+      }
+    },
+    "/itemsales/{id}": {
+      "get": {
+        "tags": ["ItemSales"],
+        "summary": "Obter um item de venda por ID",
+        "description": "Retorna os detalhes de um item de venda específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do item de venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do item de venda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Item de venda não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["ItemSales"],
+        "summary": "Atualizar um item de venda",
+        "description": "Atualiza os detalhes de um item de venda específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do item de venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemSale"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item de venda atualizado"
+          },
+          "404": {
+            "description": "Item de venda não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["ItemSales"],
+        "summary": "Excluir um item de venda",
+        "description": "Remove um item de venda específico pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID do item de venda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item de venda excluído"
+          },
+          "404": {
+            "description": "Item de venda não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "number"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "Sale": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "ItemSale": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "saleId": {
+            "type": "string"
+          },
+          "bookId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
