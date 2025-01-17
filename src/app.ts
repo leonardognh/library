@@ -15,7 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Swagger setup
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use("/books", bookRoutes);
@@ -27,9 +27,7 @@ app.use("/items", itemSaleRoutes);
 
 // Default route
 app.get("/", (req, res) => {
-  res.send(
-    "Bem-vindo à API da Livraria! Acesse /api-docs para a documentação."
-  );
+  res.redirect("/swagger");
 });
 
 export default app;
