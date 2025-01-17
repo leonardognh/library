@@ -27,7 +27,7 @@ app.use("/items", itemSaleRoutes);
 
 // Default route
 app.get("/", (req, res) => {
-  res.redirect("/swagger");
+  res.send("Bem-vindo à API da Livraria!");
 });
 
 const PORT = 3000;
