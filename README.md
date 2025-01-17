@@ -12,7 +12,7 @@ Base URLs:
 
 Operações relacionadas a livros
 
-## get\_\_books
+## Get
 
 > Code samples
 
@@ -113,7 +113,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_books
+## Post
 
 > Code samples
 
@@ -197,7 +197,7 @@ Adiciona um novo livro à livraria
 This operation does not require authentication
 </aside>
 
-## get\__books_{id}
+## Get {id}
 
 > Code samples
 
@@ -271,7 +271,7 @@ Retorna os detalhes de um livro específico pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__books_{id}
+## Put
 
 > Code samples
 
@@ -357,7 +357,7 @@ Atualiza os detalhes de um livro específico pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__books_{id}
+## Delete
 
 > Code samples
 
@@ -408,7 +408,7 @@ Remove um livro específico pelo ID
 This operation does not require authentication
 </aside>
 
-## get\_\_books_authors
+## Get
 
 > Code samples
 
@@ -510,7 +510,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## get\_\_books_categories
+## Get
 
 > Code samples
 
@@ -616,7 +616,7 @@ This operation does not require authentication
 
 Operações relacionadas a autores
 
-## get\_\_authors
+## Get
 
 > Code samples
 
@@ -709,7 +709,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_authors
+## Post
 
 > Code samples
 
@@ -781,7 +781,7 @@ Adiciona um novo autor ao sistema
 This operation does not require authentication
 </aside>
 
-## get\__authors_{id}
+## Get {id}
 
 > Code samples
 
@@ -851,7 +851,7 @@ Retorna os detalhes de um autor específico pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__authors_{id}
+## Put
 
 > Code samples
 
@@ -925,7 +925,7 @@ Atualiza os detalhes de um autor específico pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__authors_{id}
+## Delete
 
 > Code samples
 
@@ -980,7 +980,7 @@ This operation does not require authentication
 
 Operações relacionadas a categorias
 
-## get\_\_categories
+## Get
 
 > Code samples
 
@@ -1073,7 +1073,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_categories
+## Post
 
 > Code samples
 
@@ -1145,7 +1145,7 @@ Adiciona uma nova categoria ao sistema
 This operation does not require authentication
 </aside>
 
-## get\__categories_{id}
+## Get {id}
 
 > Code samples
 
@@ -1215,7 +1215,7 @@ Retorna os detalhes de uma categoria específica pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__categories_{id}
+## Put
 
 > Code samples
 
@@ -1289,7 +1289,7 @@ Atualiza os detalhes de uma categoria específica pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__categories_{id}
+## Delete
 
 > Code samples
 
@@ -1344,7 +1344,7 @@ This operation does not require authentication
 
 Operações relacionadas a clientes
 
-## get\_\_customers
+## Get
 
 > Code samples
 
@@ -1441,7 +1441,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_customers
+## Post
 
 > Code samples
 
@@ -1517,7 +1517,7 @@ Adiciona um novo cliente ao sistema
 This operation does not require authentication
 </aside>
 
-## get\__customers_{id}
+## Get {id}
 
 > Code samples
 
@@ -1589,7 +1589,7 @@ Retorna os detalhes de um cliente específico pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__customers_{id}
+## Put
 
 > Code samples
 
@@ -1667,7 +1667,7 @@ Atualiza os detalhes de um cliente específico pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__customers_{id}
+## Delete
 
 > Code samples
 
@@ -1722,7 +1722,7 @@ This operation does not require authentication
 
 Operações relacionadas a vendas
 
-## get\_\_sales
+## Get
 
 > Code samples
 
@@ -1819,7 +1819,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_sales
+## Post
 
 > Code samples
 
@@ -1895,7 +1895,7 @@ Registra uma nova venda
 This operation does not require authentication
 </aside>
 
-## get\__sales_{id}
+## Get {id}
 
 > Code samples
 
@@ -1967,7 +1967,7 @@ Retorna os detalhes de uma venda específica pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__sales_{id}
+## Put
 
 > Code samples
 
@@ -2045,7 +2045,7 @@ Atualiza os detalhes de uma venda específico pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__sales_{id}
+## Delete
 
 > Code samples
 
@@ -2100,7 +2100,7 @@ This operation does not require authentication
 
 Operações relacionadas a itens de vendas
 
-## get\_\_itemsales
+## Get
 
 > Code samples
 
@@ -2199,7 +2199,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## post\_\_itemsales
+## Post
 
 > Code samples
 
@@ -2277,7 +2277,7 @@ Registra um novo item de venda
 This operation does not require authentication
 </aside>
 
-## get\__itemsales_{id}
+## Get {id}
 
 > Code samples
 
@@ -2350,7 +2350,7 @@ Retorna os detalhes de um item de venda específico pelo ID
 This operation does not require authentication
 </aside>
 
-## put\__itemsales_{id}
+## Put
 
 > Code samples
 
@@ -2430,7 +2430,7 @@ Atualiza os detalhes de um item de venda específico pelo ID
 This operation does not require authentication
 </aside>
 
-## delete\__itemsales_{id}
+## Delete
 
 > Code samples
 
