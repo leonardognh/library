@@ -1,18 +1,16 @@
 import { Router } from "express";
-import {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-} from "../controllers/category.controller";
+import { CategoryController } from "../controllers/category.controller";
+import { dependencies } from "../dependencies";
 
 const router = Router();
 
-router.get("/", getAll);
-router.get("/:id", getById);
-router.post("/", create);
-router.put("/:id", update);
-router.delete("/:id", remove);
+const { categoryService } = dependencies;
+const categoryController = new CategoryController(categoryService);
+
+router.get("/", categoryController.getAll);
+router.get("/:id", categoryController.getById);
+router.post("/", categoryController.create);
+router.put("/:id", categoryController.update);
+router.delete("/:id", categoryController.remove);
 
 export default router;

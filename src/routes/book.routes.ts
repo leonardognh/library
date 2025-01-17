@@ -1,22 +1,19 @@
 import { Router } from "express";
-import {
-  getAll,
-  getById,
-  getAllByAuthors,
-  getAllByCategories,
-  create,
-  update,
-  remove,
-} from "../controllers/book.controller";
+import { BookController } from "../controllers/book.controller";
+import { dependencies } from "../dependencies";
 
 const router = Router();
 
-router.get("/", getAll);
-router.get("/:id", getById);
-router.get("/authors", getAllByAuthors);
-router.get("/categories", getAllByCategories);
-router.post("/", create);
-router.put("/:id", update);
-router.delete("/:id", remove);
+const { bookService } = dependencies;
+const bookController = new BookController(bookService);
+
+router.get("/authors", bookController.getAllByAuthors);
+router.get("/categories", bookController.getAllByCategories);
+
+router.get("/", bookController.getAll);
+router.get("/:id", bookController.getById);
+router.post("/", bookController.create);
+router.put("/:id", bookController.update);
+router.delete("/:id", bookController.remove);
 
 export default router;

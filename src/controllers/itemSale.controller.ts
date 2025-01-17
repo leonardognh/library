@@ -1,42 +1,48 @@
 import { Request, Response } from "express";
 import { ItemSaleService } from "../services/itemSale.service";
 
-const service = new ItemSaleService();
+export class ItemSaleController {
+  private service: ItemSaleService;
 
-export const getAll = (req: Request, res: Response): void => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 10;
-
-  const result = service.getAll(page, limit);
-  res.json(result);
-};
-export const getById = (req: Request, res: Response): void => {
-  const itemSale = service.getById(Number(req.params.id));
-  if (itemSale) {
-    res.json(itemSale);
-  } else {
-    res.status(404).send("ItemSale not found");
+  constructor(service: ItemSaleService) {
+    this.service = service;
   }
-};
 
-export const create = (req: Request, res: Response): void => {
-  service.create(req.body);
-  res.status(201).send("ItemSale created");
-};
+  getAll = (req: Request, res: Response): void => {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
 
-export const update = (req: Request, res: Response): void => {
-  const updated = service.update(Number(req.params.id), req.body);
-  if (updated) {
-    res.json(updated);
-  } else {
-    res.status(404).send("ItemSale not found");
-  }
-};
+    const result = this.service.getAll(page, limit);
+    res.json(result);
+  };
+  getById = (req: Request, res: Response): void => {
+    const itemSale = this.service.getById(Number(req.params.id));
+    if (itemSale) {
+      res.json(itemSale);
+    } else {
+      res.status(404).send("ItemSale not found");
+    }
+  };
 
-export const remove = (req: Request, res: Response): void => {
-  if (service.delete(Number(req.params.id))) {
-    res.status(200).send("ItemSale deleted");
-  } else {
-    res.status(404).send("ItemSale not found");
-  }
-};
+  create = (req: Request, res: Response): void => {
+    this.service.create(req.body);
+    res.status(201).send("ItemSale created");
+  };
+
+  update = (req: Request, res: Response): void => {
+    const updated = this.service.update(Number(req.params.id), req.body);
+    if (updated) {
+      res.json(updated);
+    } else {
+      res.status(404).send("ItemSale not found");
+    }
+  };
+
+  remove = (req: Request, res: Response): void => {
+    if (this.service.delete(Number(req.params.id))) {
+      res.status(200).send("ItemSale deleted");
+    } else {
+      res.status(404).send("ItemSale not found");
+    }
+  };
+}

@@ -1,6 +1,7 @@
+import { Authors } from "../database/authors.db";
 import { Author } from "../models/author.model";
 
-const authors: Author[] = [];
+const authors: Author[] = Authors;
 
 export class AuthorRepository {
   findAll(page: number, limit: number) {

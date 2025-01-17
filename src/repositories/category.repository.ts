@@ -1,6 +1,7 @@
+import { Categories } from "../database/categories.db";
 import { Category } from "../models/category.model";
 
-const categories: Category[] = [];
+const categories: Category[] = Categories;
 
 export class CategoryRepository {
   findAll(page: number, limit: number) {

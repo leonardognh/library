@@ -3,7 +3,11 @@ import { BookRepository } from "../repositories/book.repository";
 import { Book } from "../models/book.model";
 
 export class BookService {
-  private repository = new BookRepository();
+  private repository: BookRepository;
+
+  constructor(repository: BookRepository) {
+    this.repository = repository;
+  }
 
   getAll(page: number, limit: number) {
     return this.repository.findAll(page, limit);

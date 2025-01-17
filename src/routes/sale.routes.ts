@@ -1,17 +1,15 @@
 import { Router } from "express";
-import {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-} from "../controllers/sale.controller";
+import { SaleController } from "../controllers/sale.controller";
+import { dependencies } from "../dependencies";
 
 const router = Router();
 
-router.get("/", getAll);
-router.get("/:id", getById);
-router.post("/", create);
-router.put("/:id", update);
-router.delete("/:id", remove);
+const { saleService } = dependencies;
+const saleController = new SaleController(saleService);
+
+router.get("/", saleController.getAll);
+router.get("/:id", saleController.getById);
+router.post("/", saleController.create);
+router.put("/:id", saleController.update);
+router.delete("/:id", saleController.remove);
 export default router;

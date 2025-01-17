@@ -2,7 +2,11 @@ import { CustomerRepository } from "../repositories/customer.repository";
 import { Customer } from "../models/customer.model";
 
 export class CustomerService {
-  private repository = new CustomerRepository();
+  private repository: CustomerRepository;
+
+  constructor(repository: CustomerRepository) {
+    this.repository = repository;
+  }
 
   getAll(page: number, limit: number) {
     return this.repository.findAll(page, limit);

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node dist/src/server.js",
     "build": "rimraf dist && tsc",
-    "dev": "ts-node-dev src/server.ts"
+    "dev": "ts-node-dev src/server.ts",
+    "vercel-prod": "vercel --prod"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

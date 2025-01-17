@@ -1,14 +1,31 @@
 import { ItemSale } from "../models/itemSale.model";
+import { Book } from "../models/book.model";
+import { BookRepository } from "../repositories/book.repository";
 
 const itemSales: ItemSale[] = [];
 
 export class ItemSaleRepository {
+  private bookRepository: BookRepository;
+
+  constructor(bookRepository: BookRepository) {
+    this.bookRepository = bookRepository;
+  }
+  private getBookById(bookId: number): Book | undefined {
+    return this.bookRepository.findById(bookId);
+  }
   findAll(page: number, limit: number) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    const paginatedSales = itemSales.slice(startIndex, endIndex);
+
+    const data = paginatedSales.map((itemSale) => ({
+      ...itemSale,
+      book: this.getBookById(itemSale.bookId),
+    }));
+
     return {
-      data: itemSales.slice(startIndex, endIndex),
+      data,
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(itemSales.length / limit),
@@ -18,7 +35,17 @@ export class ItemSaleRepository {
   }
 
   findById(id: number): ItemSale | undefined {
-    return itemSales.find((itemSale) => itemSale.id === id);
+    const itemSale = itemSales.find((itemSale) => itemSale.id === id);
+    if (itemSale) {
+      return {
+        ...itemSale,
+        book: this.getBookById(itemSale.bookId),
+      };
+    }
+    return undefined;
+  }
+  filterBySaleId(saleId: number): ItemSale[] {
+    return itemSales.filter((itemSale) => itemSale.saleId === saleId);
   }
 
   create(itemSale: ItemSale): void {

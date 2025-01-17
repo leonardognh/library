@@ -1,19 +1,44 @@
+import { Category } from "../models/category.model";
+import { Books } from "../database/books.db";
 import { Book } from "../models/book.model";
-import { AuthorRepository } from "./author.repository";
-import { CategoryRepository } from "./category.repository";
+import { Author } from "../models/author.model";
+import { AuthorRepository } from "../repositories/author.repository";
+import { CategoryRepository } from "../repositories/category.repository";
 
-const books: Book[] = [];
+const books: Book[] = Books;
 
 export class BookRepository {
-  private authorRepository = new AuthorRepository();
-  private categoryRepository = new CategoryRepository();
+  private authorRepository: AuthorRepository;
+  private categoryRepository: CategoryRepository;
+
+  constructor(
+    authorRepository: AuthorRepository,
+    categoryRepository: CategoryRepository
+  ) {
+    this.authorRepository = authorRepository;
+    this.categoryRepository = categoryRepository;
+  }
+  private getAuthorsByIds(authorIds: number[]): Author[] {
+    return this.authorRepository.findByIds(authorIds);
+  }
+  private getCategoriesByIds(categoryIds: number[]): Category[] {
+    return this.categoryRepository.findByIds(categoryIds);
+  }
 
   findAll(page: number, limit: number) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    const paginatedSales = books.slice(startIndex, endIndex);
+
+    const data = paginatedSales.map((book) => ({
+      ...book,
+      category: this.getCategoriesByIds(book.categories),
+      author: this.getAuthorsByIds(book.authors),
+    }));
+
     return {
-      data: books.slice(startIndex, endIndex),
+      data,
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(books.length / limit),
@@ -23,11 +48,23 @@ export class BookRepository {
   }
 
   findById(id: number): Book | undefined {
-    return books.find((book) => book.id === id);
+    const book = books.find((book) => book.id === id);
+    if (book) {
+      return {
+        ...book,
+        category: this.getCategoriesByIds(book.categories),
+        author: this.getAuthorsByIds(book.authors),
+      };
+    }
+    return undefined;
   }
   findBooksByAuthors(authorIds: number[], page: number, limit: number) {
     const booksByAuthors = books.filter((book) =>
       book.authors.some((authorId) => authorIds.includes(authorId))
+    );
+    console.log(
+      "🚀 ~ BookRepository ~ findBooksByAuthors ~ booksByAuthors:",
+      booksByAuthors
     );
 
     const booksWithAuthors = booksByAuthors.map((book) => {
