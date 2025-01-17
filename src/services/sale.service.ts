@@ -8,7 +8,7 @@ export class SaleService {
     return this.repository.findAll(page, limit);
   }
 
-  getById(id: string): Sale | undefined {
+  getById(id: number): Sale | undefined {
     return this.repository.findById(id);
   }
 
@@ -16,11 +16,11 @@ export class SaleService {
     this.repository.create(sale);
   }
 
-  update(id: string, updated: Partial<Sale>): Sale | undefined {
+  update(id: number, updated: Partial<Sale>): Sale | undefined {
     return this.repository.update(id, updated);
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     return this.repository.delete(id);
   }
 }

@@ -17,10 +17,10 @@ export class AuthorRepository {
     };
   }
 
-  findById(id: string): Author | undefined {
+  findById(id: number): Author | undefined {
     return authors.find((author) => author.id === id);
   }
-  findByIds(authorIds: string[]) {
+  findByIds(authorIds: number[]) {
     return authors.filter((author) => authorIds.includes(author.id));
   }
 
@@ -28,7 +28,7 @@ export class AuthorRepository {
     authors.push(author);
   }
 
-  update(id: string, updated: Partial<Author>): Author | undefined {
+  update(id: number, updated: Partial<Author>): Author | undefined {
     const index = authors.findIndex((author) => author.id === id);
     if (index !== -1) {
       authors[index] = { ...authors[index], ...updated };
@@ -37,7 +37,7 @@ export class AuthorRepository {
     return undefined;
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     const index = authors.findIndex((author) => author.id === id);
     if (index !== -1) {
       authors.splice(index, 1);

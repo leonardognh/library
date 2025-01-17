@@ -9,15 +9,15 @@ export class BookService {
     return this.repository.findAll(page, limit);
   }
 
-  getAllByAuthors(authorIds: string[], page: number, limit: number) {
+  getAllByAuthors(authorIds: number[], page: number, limit: number) {
     return this.repository.findBooksByAuthors(authorIds, page, limit);
   }
 
-  getAllByCategories(categoryIds: string[], page: number, limit: number) {
+  getAllByCategories(categoryIds: number[], page: number, limit: number) {
     return this.repository.findBooksByCategories(categoryIds, page, limit);
   }
 
-  getById(id: string): Book | undefined {
+  getById(id: number): Book | undefined {
     return this.repository.findById(id);
   }
 
@@ -25,11 +25,11 @@ export class BookService {
     this.repository.create(book);
   }
 
-  update(id: string, updated: Partial<Book>): Book | undefined {
+  update(id: number, updated: Partial<Book>): Book | undefined {
     return this.repository.update(id, updated);
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     return this.repository.delete(id);
   }
 }

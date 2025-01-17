@@ -13,7 +13,7 @@ export const getAll = (req: Request, res: Response): void => {
 };
 
 export const getById = (req: Request, res: Response): void => {
-  const book = service.getById(req.params.id);
+  const book = service.getById(Number(req.params.id));
   if (book) {
     res.json(book);
   } else {
@@ -22,7 +22,8 @@ export const getById = (req: Request, res: Response): void => {
 };
 
 export const getAllByAuthors = (req: Request, res: Response) => {
-  const authorIds = (req.query.authorIds as string)?.split(",") || [];
+  const authorIds =
+    (req.query.authorIds as string)?.split(",").map(Number) || [];
   const page = parseInt(req.query.page as string) || 1;
   const limit = parseInt(req.query.limit as string) || 10;
 
@@ -30,7 +31,8 @@ export const getAllByAuthors = (req: Request, res: Response) => {
   res.json(result);
 };
 export const getAllByCategories = (req: Request, res: Response) => {
-  const categoryIds = (req.query.categoryIds as string)?.split(",") || [];
+  const categoryIds =
+    (req.query.categoryIds as string)?.split(",").map(Number) || [];
   const page = parseInt(req.query.page as string) || 1;
   const limit = parseInt(req.query.limit as string) || 10;
 
@@ -44,7 +46,7 @@ export const create = (req: Request, res: Response): void => {
 };
 
 export const update = (req: Request, res: Response): void => {
-  const updated = service.update(req.params.id, req.body);
+  const updated = service.update(Number(req.params.id), req.body);
   if (updated) {
     res.json(updated);
   } else {
@@ -53,7 +55,7 @@ export const update = (req: Request, res: Response): void => {
 };
 
 export const remove = (req: Request, res: Response): void => {
-  if (service.delete(req.params.id)) {
+  if (service.delete(Number(req.params.id))) {
     res.status(200).send("Book deleted");
   } else {
     res.status(404).send("Book not found");

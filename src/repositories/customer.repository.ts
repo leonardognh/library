@@ -17,7 +17,7 @@ export class CustomerRepository {
     };
   }
 
-  findById(id: string): Customer | undefined {
+  findById(id: number): Customer | undefined {
     return customers.find((customer) => customer.id === id);
   }
 
@@ -25,7 +25,7 @@ export class CustomerRepository {
     customers.push(customer);
   }
 
-  update(id: string, updated: Partial<Customer>): Customer | undefined {
+  update(id: number, updated: Partial<Customer>): Customer | undefined {
     const index = customers.findIndex((customer) => customer.id === id);
     if (index !== -1) {
       customers[index] = { ...customers[index], ...updated };
@@ -34,7 +34,7 @@ export class CustomerRepository {
     return undefined;
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     const index = customers.findIndex((customer) => customer.id === id);
     if (index !== -1) {
       customers.splice(index, 1);

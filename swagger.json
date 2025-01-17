@@ -133,7 +133,7 @@
             "required": true,
             "description": "ID do livro",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -164,7 +164,7 @@
             "required": true,
             "description": "ID do livro",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -198,7 +198,7 @@
             "required": true,
             "description": "ID do livro",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -224,8 +224,8 @@
             "required": true,
             "description": "Lista de IDs de autores separados por vírgula",
             "schema": {
-              "type": "string",
-              "example": "auth1,auth2"
+              "type": "integer",
+              "example": "1,2"
             }
           },
           {
@@ -297,8 +297,8 @@
             "required": true,
             "description": "Lista de IDs de categorias separados por vírgula",
             "schema": {
-              "type": "string",
-              "example": "cat1,cat2"
+              "type": "integer",
+              "example": "1,2"
             }
           },
           {
@@ -453,7 +453,7 @@
             "required": true,
             "description": "ID do autor",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -484,7 +484,7 @@
             "required": true,
             "description": "ID do autor",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -518,7 +518,7 @@
             "required": true,
             "description": "ID do autor",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -627,7 +627,7 @@
             "required": true,
             "description": "ID da categoria",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -658,7 +658,7 @@
             "required": true,
             "description": "ID da categoria",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -692,7 +692,7 @@
             "required": true,
             "description": "ID da categoria",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -801,7 +801,7 @@
             "required": true,
             "description": "ID do cliente",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -832,7 +832,7 @@
             "required": true,
             "description": "ID do cliente",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -866,7 +866,7 @@
             "required": true,
             "description": "ID do cliente",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -975,7 +975,7 @@
             "required": true,
             "description": "ID da venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1006,7 +1006,7 @@
             "required": true,
             "description": "ID da venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1040,7 +1040,7 @@
             "required": true,
             "description": "ID de venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1150,7 +1150,7 @@
             "required": true,
             "description": "ID do item de venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1181,7 +1181,7 @@
             "required": true,
             "description": "ID do item de venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1215,7 +1215,7 @@
             "required": true,
             "description": "ID do item de venda",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -1236,7 +1236,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "title": {
             "type": "string"
@@ -1250,13 +1250,13 @@
           "categories": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer"
             }
           },
           "authors": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer"
             }
           }
         }
@@ -1265,7 +1265,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "name": {
             "type": "string"
@@ -1276,7 +1276,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "description": {
             "type": "string"
@@ -1287,7 +1287,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "name": {
             "type": "string"
@@ -1304,10 +1304,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "customerId": {
-            "type": "string"
+            "type": "integer"
           },
           "date": {
             "type": "string",
@@ -1322,13 +1322,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "integer"
           },
           "saleId": {
-            "type": "string"
+            "type": "integer"
           },
           "bookId": {
-            "type": "string"
+            "type": "integer"
           },
           "quantity": {
             "type": "number"

@@ -8,7 +8,7 @@ export class ItemSaleService {
     return this.repository.findAll(page, limit);
   }
 
-  getById(id: string): ItemSale | undefined {
+  getById(id: number): ItemSale | undefined {
     return this.repository.findById(id);
   }
 
@@ -16,11 +16,11 @@ export class ItemSaleService {
     this.repository.create(itemSale);
   }
 
-  update(id: string, updated: Partial<ItemSale>): ItemSale | undefined {
+  update(id: number, updated: Partial<ItemSale>): ItemSale | undefined {
     return this.repository.update(id, updated);
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     return this.repository.delete(id);
   }
 }

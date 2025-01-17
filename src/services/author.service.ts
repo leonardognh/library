@@ -8,7 +8,7 @@ export class AuthorService {
     return this.repository.findAll(page, limit);
   }
 
-  getById(id: string): Author | undefined {
+  getById(id: number): Author | undefined {
     return this.repository.findById(id);
   }
 
@@ -16,11 +16,11 @@ export class AuthorService {
     this.repository.create(author);
   }
 
-  update(id: string, updated: Partial<Author>): Author | undefined {
+  update(id: number, updated: Partial<Author>): Author | undefined {
     return this.repository.update(id, updated);
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     return this.repository.delete(id);
   }
 }

@@ -17,10 +17,10 @@ export class CategoryRepository {
     };
   }
 
-  findById(id: string): Category | undefined {
+  findById(id: number): Category | undefined {
     return categories.find((category) => category.id === id);
   }
-  findByIds(categoryIds: string[]) {
+  findByIds(categoryIds: number[]) {
     return categories.filter((category) => categoryIds.includes(category.id));
   }
 
@@ -28,7 +28,7 @@ export class CategoryRepository {
     categories.push(category);
   }
 
-  update(id: string, updated: Partial<Category>): Category | undefined {
+  update(id: number, updated: Partial<Category>): Category | undefined {
     const index = categories.findIndex((category) => category.id === id);
     if (index !== -1) {
       categories[index] = { ...categories[index], ...updated };
@@ -37,7 +37,7 @@ export class CategoryRepository {
     return undefined;
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     const index = categories.findIndex((category) => category.id === id);
     if (index !== -1) {
       categories.splice(index, 1);

@@ -11,7 +11,7 @@ export const getAll = (req: Request, res: Response): void => {
   res.json(result);
 };
 export const getById = (req: Request, res: Response): void => {
-  const itemSale = service.getById(req.params.id);
+  const itemSale = service.getById(Number(req.params.id));
   if (itemSale) {
     res.json(itemSale);
   } else {
@@ -25,7 +25,7 @@ export const create = (req: Request, res: Response): void => {
 };
 
 export const update = (req: Request, res: Response): void => {
-  const updated = service.update(req.params.id, req.body);
+  const updated = service.update(Number(req.params.id), req.body);
   if (updated) {
     res.json(updated);
   } else {
@@ -34,7 +34,7 @@ export const update = (req: Request, res: Response): void => {
 };
 
 export const remove = (req: Request, res: Response): void => {
-  if (service.delete(req.params.id)) {
+  if (service.delete(Number(req.params.id))) {
     res.status(200).send("ItemSale deleted");
   } else {
     res.status(404).send("ItemSale not found");

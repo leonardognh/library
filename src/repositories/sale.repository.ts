@@ -17,7 +17,7 @@ export class SaleRepository {
     };
   }
 
-  findById(id: string): Sale | undefined {
+  findById(id: number): Sale | undefined {
     return sales.find((sale) => sale.id === id);
   }
 
@@ -25,7 +25,7 @@ export class SaleRepository {
     sales.push(sale);
   }
 
-  update(id: string, updated: Partial<Sale>): Sale | undefined {
+  update(id: number, updated: Partial<Sale>): Sale | undefined {
     const index = sales.findIndex((sale) => sale.id === id);
     if (index !== -1) {
       sales[index] = { ...sales[index], ...updated };
@@ -34,7 +34,7 @@ export class SaleRepository {
     return undefined;
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     const index = sales.findIndex((sale) => sale.id === id);
     if (index !== -1) {
       sales.splice(index, 1);

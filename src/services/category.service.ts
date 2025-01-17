@@ -8,7 +8,7 @@ export class CategoryService {
     return this.repository.findAll(page, limit);
   }
 
-  getById(id: string): Category | undefined {
+  getById(id: number): Category | undefined {
     return this.repository.findById(id);
   }
 
@@ -16,11 +16,11 @@ export class CategoryService {
     this.repository.create(category);
   }
 
-  update(id: string, updated: Partial<Category>): Category | undefined {
+  update(id: number, updated: Partial<Category>): Category | undefined {
     return this.repository.update(id, updated);
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     return this.repository.delete(id);
   }
 }

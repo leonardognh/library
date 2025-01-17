@@ -56,10 +56,10 @@ Retorna uma lista de todos os livros disponíveis
 
 <h3 id="get__books-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -69,12 +69,12 @@ Retorna uma lista de todos os livros disponíveis
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "title": "string",
       "price": 0,
       "stock": 0,
-      "categories": ["string"],
-      "authors": ["string"]
+      "categories": ["number"],
+      "authors": ["number"]
     }
   ],
   "pagination": {
@@ -98,16 +98,16 @@ Status Code **200**
 | Name           | Type                  | Required | Restrictions | Description |
 | -------------- | --------------------- | -------- | ------------ | ----------- |
 | » data         | [[Book](#schemabook)] | false    | none         | none        |
-| »» id          | string                | false    | none         | none        |
+| »» id          | number                | false    | none         | none        |
 | »» title       | string                | false    | none         | none        |
 | »» price       | number                | false    | none         | none        |
 | »» stock       | number                | false    | none         | none        |
 | »» categories  | [string]              | false    | none         | none        |
 | »» authors     | [string]              | false    | none         | none        |
 | » pagination   | object                | false    | none         | none        |
-| »» currentPage | integer               | false    | none         | none        |
-| »» totalPages  | integer               | false    | none         | none        |
-| »» totalItems  | integer               | false    | none         | none        |
+| »» currentPage | number                | false    | none         | none        |
+| »» totalPages  | number                | false    | none         | none        |
+| »» totalItems  | number                | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -132,34 +132,29 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "title": "string",
-  "price": 0,
-  "stock": 0,
-  "categories": [
-    "string"
-  ],
-  "authors": [
-    "string"
-  ]
-}';
+const inputBody = {
+  id: "number",
+  title: "string",
+  price: 0,
+  stock: 0,
+  categories: ["number"],
+  authors: ["number"],
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/books',
-{
-  method: 'POST',
+fetch("http://localhost:3000/books", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /books`
@@ -172,12 +167,12 @@ Adiciona um novo livro à livraria
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "title": "string",
   "price": 0,
   "stock": 0,
-  "categories": ["string"],
-  "authors": ["string"]
+  "categories": ["number"],
+  "authors": ["number"]
 }
 ```
 
@@ -243,7 +238,7 @@ Retorna os detalhes de um livro específico pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID do livro |
+| id   | path | number | true     | ID do livro |
 
 > Example responses
 
@@ -251,12 +246,12 @@ Retorna os detalhes de um livro específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "title": "string",
   "price": 0,
   "stock": 0,
-  "categories": ["string"],
-  "authors": ["string"]
+  "categories": ["number"],
+  "authors": ["number"]
 }
 ```
 
@@ -290,34 +285,29 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "title": "string",
-  "price": 0,
-  "stock": 0,
-  "categories": [
-    "string"
-  ],
-  "authors": [
-    "string"
-  ]
-}';
+const inputBody = {
+  id: "number",
+  title: "string",
+  price: 0,
+  stock: 0,
+  categories: ["number"],
+  authors: ["number"],
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/books/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/books/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /books/{id}`
@@ -330,12 +320,12 @@ Atualiza os detalhes de um livro específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "title": "string",
   "price": 0,
   "stock": 0,
-  "categories": ["string"],
-  "authors": ["string"]
+  "categories": ["number"],
+  "authors": ["number"]
 }
 ```
 
@@ -343,7 +333,7 @@ Atualiza os detalhes de um livro específico pelo ID
 
 | Name | In   | Type                | Required | Description |
 | ---- | ---- | ------------------- | -------- | ----------- |
-| id   | path | string              | true     | ID do livro |
+| id   | path | number              | true     | ID do livro |
 | body | body | [Book](#schemabook) | true     | none        |
 
 <h3 id="put__books_{id}-responses">Responses</h3>
@@ -395,7 +385,7 @@ Remove um livro específico pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID do livro |
+| id   | path | number | true     | ID do livro |
 
 <h3 id="delete__books_{id}-responses">Responses</h3>
 
@@ -452,11 +442,11 @@ Retorna uma lista de livros por múltiplos autores com suporte à paginação
 
 <h3 id="get__books_authors-parameters">Parameters</h3>
 
-| Name      | In    | Type    | Required | Description                                   |
-| --------- | ----- | ------- | -------- | --------------------------------------------- |
-| authorIds | query | string  | true     | Lista de IDs de autores separados por vírgula |
-| page      | query | integer | false    | Número da página                              |
-| limit     | query | integer | false    | Quantidade de itens por página                |
+| Name      | In    | Type   | Required | Description                                   |
+| --------- | ----- | ------ | -------- | --------------------------------------------- |
+| authorIds | query | string | true     | Lista de IDs de autores separados por vírgula |
+| page      | query | number | false    | Número da página                              |
+| limit     | query | number | false    | Quantidade de itens por página                |
 
 > Example responses
 
@@ -466,12 +456,12 @@ Retorna uma lista de livros por múltiplos autores com suporte à paginação
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "title": "string",
       "price": 0,
       "stock": 0,
-      "categories": ["string"],
-      "authors": ["string"]
+      "categories": ["number"],
+      "authors": ["number"]
     }
   ],
   "pagination": {
@@ -495,16 +485,16 @@ Status Code **200**
 | Name           | Type                  | Required | Restrictions | Description |
 | -------------- | --------------------- | -------- | ------------ | ----------- |
 | » data         | [[Book](#schemabook)] | false    | none         | none        |
-| »» id          | string                | false    | none         | none        |
+| »» id          | number                | false    | none         | none        |
 | »» title       | string                | false    | none         | none        |
 | »» price       | number                | false    | none         | none        |
 | »» stock       | number                | false    | none         | none        |
 | »» categories  | [string]              | false    | none         | none        |
 | »» authors     | [string]              | false    | none         | none        |
 | » pagination   | object                | false    | none         | none        |
-| »» currentPage | integer               | false    | none         | none        |
-| »» totalPages  | integer               | false    | none         | none        |
-| »» totalItems  | integer               | false    | none         | none        |
+| »» currentPage | number                | false    | none         | none        |
+| »» totalPages  | number                | false    | none         | none        |
+| »» totalItems  | number                | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -554,11 +544,11 @@ Retorna uma lista de livros por múltiplas categorias com suporte à paginação
 
 <h3 id="get__books_categories-parameters">Parameters</h3>
 
-| Name        | In    | Type    | Required | Description                                      |
-| ----------- | ----- | ------- | -------- | ------------------------------------------------ |
-| categoryIds | query | string  | true     | Lista de IDs de categorias separados por vírgula |
-| page        | query | integer | false    | Número da página                                 |
-| limit       | query | integer | false    | Quantidade de itens por página                   |
+| Name        | In    | Type   | Required | Description                                      |
+| ----------- | ----- | ------ | -------- | ------------------------------------------------ |
+| categoryIds | query | string | true     | Lista de IDs de categorias separados por vírgula |
+| page        | query | number | false    | Número da página                                 |
+| limit       | query | number | false    | Quantidade de itens por página                   |
 
 > Example responses
 
@@ -568,12 +558,12 @@ Retorna uma lista de livros por múltiplas categorias com suporte à paginação
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "title": "string",
       "price": 0,
       "stock": 0,
-      "categories": ["string"],
-      "authors": ["string"]
+      "categories": ["number"],
+      "authors": ["number"]
     }
   ],
   "pagination": {
@@ -597,16 +587,16 @@ Status Code **200**
 | Name           | Type                  | Required | Restrictions | Description |
 | -------------- | --------------------- | -------- | ------------ | ----------- |
 | » data         | [[Book](#schemabook)] | false    | none         | none        |
-| »» id          | string                | false    | none         | none        |
+| »» id          | number                | false    | none         | none        |
 | »» title       | string                | false    | none         | none        |
 | »» price       | number                | false    | none         | none        |
 | »» stock       | number                | false    | none         | none        |
 | »» categories  | [string]              | false    | none         | none        |
 | »» authors     | [string]              | false    | none         | none        |
 | » pagination   | object                | false    | none         | none        |
-| »» currentPage | integer               | false    | none         | none        |
-| »» totalPages  | integer               | false    | none         | none        |
-| »» totalItems  | integer               | false    | none         | none        |
+| »» currentPage | number                | false    | none         | none        |
+| »» totalPages  | number                | false    | none         | none        |
+| »» totalItems  | number                | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -660,10 +650,10 @@ Retorna uma lista de todos os autores cadastrados
 
 <h3 id="get__authors-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -673,7 +663,7 @@ Retorna uma lista de todos os autores cadastrados
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "name": "string"
     }
   ],
@@ -698,12 +688,12 @@ Status Code **200**
 | Name           | Type                      | Required | Restrictions | Description |
 | -------------- | ------------------------- | -------- | ------------ | ----------- |
 | » data         | [[Author](#schemaauthor)] | false    | none         | none        |
-| »» id          | string                    | false    | none         | none        |
+| »» id          | number                    | false    | none         | none        |
 | »» name        | string                    | false    | none         | none        |
 | » pagination   | object                    | false    | none         | none        |
-| »» currentPage | integer                   | false    | none         | none        |
-| »» totalPages  | integer                   | false    | none         | none        |
-| »» totalItems  | integer                   | false    | none         | none        |
+| »» currentPage | number                    | false    | none         | none        |
+| »» totalPages  | number                    | false    | none         | none        |
+| »» totalItems  | number                    | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -728,26 +718,25 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "name": "string"
-}';
+const inputBody = {
+  id: "number",
+  name: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/authors',
-{
-  method: 'POST',
+fetch("http://localhost:3000/authors", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /authors`
@@ -760,7 +749,7 @@ Adiciona um novo autor ao sistema
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string"
 }
 ```
@@ -827,7 +816,7 @@ Retorna os detalhes de um autor específico pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID do autor |
+| id   | path | number | true     | ID do autor |
 
 > Example responses
 
@@ -835,7 +824,7 @@ Retorna os detalhes de um autor específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string"
 }
 ```
@@ -870,26 +859,25 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "name": "string"
-}';
+const inputBody = {
+  id: "number",
+  name: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/authors/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/authors/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /authors/{id}`
@@ -902,7 +890,7 @@ Atualiza os detalhes de um autor específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string"
 }
 ```
@@ -911,7 +899,7 @@ Atualiza os detalhes de um autor específico pelo ID
 
 | Name | In   | Type                    | Required | Description |
 | ---- | ---- | ----------------------- | -------- | ----------- |
-| id   | path | string                  | true     | ID do autor |
+| id   | path | number                  | true     | ID do autor |
 | body | body | [Author](#schemaauthor) | true     | none        |
 
 <h3 id="put__authors_{id}-responses">Responses</h3>
@@ -963,7 +951,7 @@ Remove um autor específico pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID do autor |
+| id   | path | number | true     | ID do autor |
 
 <h3 id="delete__authors_{id}-responses">Responses</h3>
 
@@ -1024,10 +1012,10 @@ Retorna uma lista de todas as categorias cadastradas
 
 <h3 id="get__categories-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -1037,7 +1025,7 @@ Retorna uma lista de todas as categorias cadastradas
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "description": "string"
     }
   ],
@@ -1062,12 +1050,12 @@ Status Code **200**
 | Name           | Type                          | Required | Restrictions | Description |
 | -------------- | ----------------------------- | -------- | ------------ | ----------- |
 | » data         | [[Category](#schemacategory)] | false    | none         | none        |
-| »» id          | string                        | false    | none         | none        |
+| »» id          | number                        | false    | none         | none        |
 | »» description | string                        | false    | none         | none        |
 | » pagination   | object                        | false    | none         | none        |
-| »» currentPage | integer                       | false    | none         | none        |
-| »» totalPages  | integer                       | false    | none         | none        |
-| »» totalItems  | integer                       | false    | none         | none        |
+| »» currentPage | number                        | false    | none         | none        |
+| »» totalPages  | number                        | false    | none         | none        |
+| »» totalItems  | number                        | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -1092,26 +1080,25 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "description": "string"
-}';
+const inputBody = {
+  id: "number",
+  description: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/categories',
-{
-  method: 'POST',
+fetch("http://localhost:3000/categories", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /categories`
@@ -1124,7 +1111,7 @@ Adiciona uma nova categoria ao sistema
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "description": "string"
 }
 ```
@@ -1191,7 +1178,7 @@ Retorna os detalhes de uma categoria específica pelo ID
 
 | Name | In   | Type   | Required | Description     |
 | ---- | ---- | ------ | -------- | --------------- |
-| id   | path | string | true     | ID da categoria |
+| id   | path | number | true     | ID da categoria |
 
 > Example responses
 
@@ -1199,7 +1186,7 @@ Retorna os detalhes de uma categoria específica pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "description": "string"
 }
 ```
@@ -1234,26 +1221,25 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "description": "string"
-}';
+const inputBody = {
+  id: "number",
+  description: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/categories/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/categories/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /categories/{id}`
@@ -1266,7 +1252,7 @@ Atualiza os detalhes de uma categoria específica pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "description": "string"
 }
 ```
@@ -1275,7 +1261,7 @@ Atualiza os detalhes de uma categoria específica pelo ID
 
 | Name | In   | Type                        | Required | Description     |
 | ---- | ---- | --------------------------- | -------- | --------------- |
-| id   | path | string                      | true     | ID da categoria |
+| id   | path | number                      | true     | ID da categoria |
 | body | body | [Category](#schemacategory) | true     | none            |
 
 <h3 id="put__categories_{id}-responses">Responses</h3>
@@ -1327,7 +1313,7 @@ Remove uma categoria específica pelo ID
 
 | Name | In   | Type   | Required | Description     |
 | ---- | ---- | ------ | -------- | --------------- |
-| id   | path | string | true     | ID da categoria |
+| id   | path | number | true     | ID da categoria |
 
 <h3 id="delete__categories_{id}-responses">Responses</h3>
 
@@ -1388,10 +1374,10 @@ Retorna uma lista de todos os clientes cadastrados
 
 <h3 id="get__customers-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -1401,7 +1387,7 @@ Retorna uma lista de todos os clientes cadastrados
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "name": "string",
       "email": "string",
       "phone": "string"
@@ -1428,14 +1414,14 @@ Status Code **200**
 | Name           | Type                          | Required | Restrictions | Description |
 | -------------- | ----------------------------- | -------- | ------------ | ----------- |
 | » data         | [[Customer](#schemacustomer)] | false    | none         | none        |
-| »» id          | string                        | false    | none         | none        |
+| »» id          | number                        | false    | none         | none        |
 | »» name        | string                        | false    | none         | none        |
 | »» email       | string                        | false    | none         | none        |
 | »» phone       | string                        | false    | none         | none        |
 | » pagination   | object                        | false    | none         | none        |
-| »» currentPage | integer                       | false    | none         | none        |
-| »» totalPages  | integer                       | false    | none         | none        |
-| »» totalItems  | integer                       | false    | none         | none        |
+| »» currentPage | number                        | false    | none         | none        |
+| »» totalPages  | number                        | false    | none         | none        |
+| »» totalItems  | number                        | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -1460,28 +1446,27 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "name": "string",
-  "email": "string",
-  "phone": "string"
-}';
+const inputBody = {
+  id: "number",
+  name: "string",
+  email: "string",
+  phone: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/customers',
-{
-  method: 'POST',
+fetch("http://localhost:3000/customers", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /customers`
@@ -1494,7 +1479,7 @@ Adiciona um novo cliente ao sistema
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string",
   "email": "string",
   "phone": "string"
@@ -1563,7 +1548,7 @@ Retorna os detalhes de um cliente específico pelo ID
 
 | Name | In   | Type   | Required | Description   |
 | ---- | ---- | ------ | -------- | ------------- |
-| id   | path | string | true     | ID do cliente |
+| id   | path | number | true     | ID do cliente |
 
 > Example responses
 
@@ -1571,7 +1556,7 @@ Retorna os detalhes de um cliente específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string",
   "email": "string",
   "phone": "string"
@@ -1608,28 +1593,27 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "name": "string",
-  "email": "string",
-  "phone": "string"
-}';
+const inputBody = {
+  id: "number",
+  name: "string",
+  email: "string",
+  phone: "string",
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/customers/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/customers/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /customers/{id}`
@@ -1642,7 +1626,7 @@ Atualiza os detalhes de um cliente específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string",
   "email": "string",
   "phone": "string"
@@ -1653,7 +1637,7 @@ Atualiza os detalhes de um cliente específico pelo ID
 
 | Name | In   | Type                        | Required | Description   |
 | ---- | ---- | --------------------------- | -------- | ------------- |
-| id   | path | string                      | true     | ID do cliente |
+| id   | path | number                      | true     | ID do cliente |
 | body | body | [Customer](#schemacustomer) | true     | none          |
 
 <h3 id="put__customers_{id}-responses">Responses</h3>
@@ -1705,7 +1689,7 @@ Remove um cliente específico pelo ID
 
 | Name | In   | Type   | Required | Description   |
 | ---- | ---- | ------ | -------- | ------------- |
-| id   | path | string | true     | ID do cliente |
+| id   | path | number | true     | ID do cliente |
 
 <h3 id="delete__customers_{id}-responses">Responses</h3>
 
@@ -1766,10 +1750,10 @@ Retorna uma lista de todas as vendas realizadas
 
 <h3 id="get__sales-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -1779,7 +1763,7 @@ Retorna uma lista de todas as vendas realizadas
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "customerId": "string",
       "date": "2019-08-24T14:15:22Z",
       "total": 0
@@ -1806,14 +1790,14 @@ Status Code **200**
 | Name           | Type                  | Required | Restrictions | Description |
 | -------------- | --------------------- | -------- | ------------ | ----------- |
 | » data         | [[Sale](#schemasale)] | false    | none         | none        |
-| »» id          | string                | false    | none         | none        |
+| »» id          | number                | false    | none         | none        |
 | »» customerId  | string                | false    | none         | none        |
 | »» date        | string(date-time)     | false    | none         | none        |
 | »» total       | number                | false    | none         | none        |
 | » pagination   | object                | false    | none         | none        |
-| »» currentPage | integer               | false    | none         | none        |
-| »» totalPages  | integer               | false    | none         | none        |
-| »» totalItems  | integer               | false    | none         | none        |
+| »» currentPage | number                | false    | none         | none        |
+| »» totalPages  | number                | false    | none         | none        |
+| »» totalItems  | number                | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -1838,28 +1822,27 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "customerId": "string",
-  "date": "2019-08-24T14:15:22Z",
-  "total": 0
-}';
+const inputBody = {
+  id: "number",
+  customerId: "string",
+  date: "2019-08-24T14:15:22Z",
+  total: 0,
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/sales',
-{
-  method: 'POST',
+fetch("http://localhost:3000/sales", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /sales`
@@ -1872,7 +1855,7 @@ Registra uma nova venda
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "customerId": "string",
   "date": "2019-08-24T14:15:22Z",
   "total": 0
@@ -1941,7 +1924,7 @@ Retorna os detalhes de uma venda específica pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID da venda |
+| id   | path | number | true     | ID da venda |
 
 > Example responses
 
@@ -1949,7 +1932,7 @@ Retorna os detalhes de uma venda específica pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "customerId": "string",
   "date": "2019-08-24T14:15:22Z",
   "total": 0
@@ -1986,28 +1969,27 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "customerId": "string",
-  "date": "2019-08-24T14:15:22Z",
-  "total": 0
-}';
+const inputBody = {
+  id: "number",
+  customerId: "string",
+  date: "2019-08-24T14:15:22Z",
+  total: 0,
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/sales/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/sales/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /sales/{id}`
@@ -2020,7 +2002,7 @@ Atualiza os detalhes de uma venda específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "customerId": "string",
   "date": "2019-08-24T14:15:22Z",
   "total": 0
@@ -2031,7 +2013,7 @@ Atualiza os detalhes de uma venda específico pelo ID
 
 | Name | In   | Type                | Required | Description |
 | ---- | ---- | ------------------- | -------- | ----------- |
-| id   | path | string              | true     | ID da venda |
+| id   | path | number              | true     | ID da venda |
 | body | body | [Sale](#schemasale) | true     | none        |
 
 <h3 id="put__sales_{id}-responses">Responses</h3>
@@ -2083,7 +2065,7 @@ Remove de venda específico pelo ID
 
 | Name | In   | Type   | Required | Description |
 | ---- | ---- | ------ | -------- | ----------- |
-| id   | path | string | true     | ID de venda |
+| id   | path | number | true     | ID de venda |
 
 <h3 id="delete__sales_{id}-responses">Responses</h3>
 
@@ -2144,10 +2126,10 @@ Retorna uma lista de todos os itens de vendas
 
 <h3 id="get__itemsales-parameters">Parameters</h3>
 
-| Name  | In    | Type    | Required | Description                    |
-| ----- | ----- | ------- | -------- | ------------------------------ |
-| page  | query | integer | false    | Número da página               |
-| limit | query | integer | false    | Quantidade de itens por página |
+| Name  | In    | Type   | Required | Description                    |
+| ----- | ----- | ------ | -------- | ------------------------------ |
+| page  | query | number | false    | Número da página               |
+| limit | query | number | false    | Quantidade de itens por página |
 
 > Example responses
 
@@ -2157,7 +2139,7 @@ Retorna uma lista de todos os itens de vendas
 {
   "data": [
     {
-      "id": "string",
+      "id": "number",
       "saleId": "string",
       "bookId": "string",
       "quantity": 0,
@@ -2185,15 +2167,15 @@ Status Code **200**
 | Name           | Type                          | Required | Restrictions | Description |
 | -------------- | ----------------------------- | -------- | ------------ | ----------- |
 | » data         | [[ItemSale](#schemaitemsale)] | false    | none         | none        |
-| »» id          | string                        | false    | none         | none        |
+| »» id          | number                        | false    | none         | none        |
 | »» saleId      | string                        | false    | none         | none        |
 | »» bookId      | string                        | false    | none         | none        |
 | »» quantity    | number                        | false    | none         | none        |
 | »» price       | number                        | false    | none         | none        |
 | » pagination   | object                        | false    | none         | none        |
-| »» currentPage | integer                       | false    | none         | none        |
-| »» totalPages  | integer                       | false    | none         | none        |
-| »» totalItems  | integer                       | false    | none         | none        |
+| »» currentPage | number                        | false    | none         | none        |
+| »» totalPages  | number                        | false    | none         | none        |
+| »» totalItems  | number                        | false    | none         | none        |
 
 <aside class="success">
 This operation does not require authentication
@@ -2218,29 +2200,28 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "saleId": "string",
-  "bookId": "string",
-  "quantity": 0,
-  "price": 0
-}';
+const inputBody = {
+  id: "number",
+  saleId: "string",
+  bookId: "string",
+  quantity: 0,
+  price: 0,
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/itemsales',
-{
-  method: 'POST',
+fetch("http://localhost:3000/itemsales", {
+  method: "POST",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `POST /itemsales`
@@ -2253,7 +2234,7 @@ Registra um novo item de venda
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "saleId": "string",
   "bookId": "string",
   "quantity": 0,
@@ -2323,7 +2304,7 @@ Retorna os detalhes de um item de venda específico pelo ID
 
 | Name | In   | Type   | Required | Description         |
 | ---- | ---- | ------ | -------- | ------------------- |
-| id   | path | string | true     | ID do item de venda |
+| id   | path | number | true     | ID do item de venda |
 
 > Example responses
 
@@ -2331,7 +2312,7 @@ Retorna os detalhes de um item de venda específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "saleId": "string",
   "bookId": "string",
   "quantity": 0,
@@ -2369,29 +2350,28 @@ Content-Type: application/json
 ```
 
 ```javascript
-const inputBody = '{
-  "id": "string",
-  "saleId": "string",
-  "bookId": "string",
-  "quantity": 0,
-  "price": 0
-}';
+const inputBody = {
+  id: "number",
+  saleId: "string",
+  bookId: "string",
+  quantity: 0,
+  price: 0,
+};
 const headers = {
-  'Content-Type':'application/json'
+  "Content-Type": "application/json",
 };
 
-fetch('http://localhost:3000/itemsales/{id}',
-{
-  method: 'PUT',
+fetch("http://localhost:3000/itemsales/{id}", {
+  method: "PUT",
   body: inputBody,
-  headers: headers
+  headers: headers,
 })
-.then(function(res) {
+  .then(function (res) {
     return res.json();
-}).then(function(body) {
+  })
+  .then(function (body) {
     console.log(body);
-});
-
+  });
 ```
 
 `PUT /itemsales/{id}`
@@ -2404,7 +2384,7 @@ Atualiza os detalhes de um item de venda específico pelo ID
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "saleId": "string",
   "bookId": "string",
   "quantity": 0,
@@ -2416,7 +2396,7 @@ Atualiza os detalhes de um item de venda específico pelo ID
 
 | Name | In   | Type                        | Required | Description         |
 | ---- | ---- | --------------------------- | -------- | ------------------- |
-| id   | path | string                      | true     | ID do item de venda |
+| id   | path | number                      | true     | ID do item de venda |
 | body | body | [ItemSale](#schemaitemsale) | true     | none                |
 
 <h3 id="put__itemsales_{id}-responses">Responses</h3>
@@ -2468,7 +2448,7 @@ Remove um item de venda específico pelo ID
 
 | Name | In   | Type   | Required | Description         |
 | ---- | ---- | ------ | -------- | ------------------- |
-| id   | path | string | true     | ID do item de venda |
+| id   | path | number | true     | ID do item de venda |
 
 <h3 id="delete__itemsales_{id}-responses">Responses</h3>
 
@@ -2491,12 +2471,12 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "title": "string",
   "price": 0,
   "stock": 0,
-  "categories": ["string"],
-  "authors": ["string"]
+  "categories": ["number"],
+  "authors": ["number"]
 }
 ```
 
@@ -2504,7 +2484,7 @@ This operation does not require authentication
 
 | Name       | Type     | Required | Restrictions | Description |
 | ---------- | -------- | -------- | ------------ | ----------- |
-| id         | string   | false    | none         | none        |
+| id         | number   | false    | none         | none        |
 | title      | string   | false    | none         | none        |
 | price      | number   | false    | none         | none        |
 | stock      | number   | false    | none         | none        |
@@ -2519,7 +2499,7 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string"
 }
 ```
@@ -2528,7 +2508,7 @@ This operation does not require authentication
 
 | Name | Type   | Required | Restrictions | Description |
 | ---- | ------ | -------- | ------------ | ----------- |
-| id   | string | false    | none         | none        |
+| id   | number | false    | none         | none        |
 | name | string | false    | none         | none        |
 
 <h2 id="tocS_Category">Category</h2>
@@ -2539,7 +2519,7 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "description": "string"
 }
 ```
@@ -2548,7 +2528,7 @@ This operation does not require authentication
 
 | Name        | Type   | Required | Restrictions | Description |
 | ----------- | ------ | -------- | ------------ | ----------- |
-| id          | string | false    | none         | none        |
+| id          | number | false    | none         | none        |
 | description | string | false    | none         | none        |
 
 <h2 id="tocS_Customer">Customer</h2>
@@ -2559,7 +2539,7 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "name": "string",
   "email": "string",
   "phone": "string"
@@ -2570,7 +2550,7 @@ This operation does not require authentication
 
 | Name  | Type   | Required | Restrictions | Description |
 | ----- | ------ | -------- | ------------ | ----------- |
-| id    | string | false    | none         | none        |
+| id    | number | false    | none         | none        |
 | name  | string | false    | none         | none        |
 | email | string | false    | none         | none        |
 | phone | string | false    | none         | none        |
@@ -2583,7 +2563,7 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "customerId": "string",
   "date": "2019-08-24T14:15:22Z",
   "total": 0
@@ -2594,7 +2574,7 @@ This operation does not require authentication
 
 | Name       | Type              | Required | Restrictions | Description |
 | ---------- | ----------------- | -------- | ------------ | ----------- |
-| id         | string            | false    | none         | none        |
+| id         | number            | false    | none         | none        |
 | customerId | string            | false    | none         | none        |
 | date       | string(date-time) | false    | none         | none        |
 | total      | number            | false    | none         | none        |
@@ -2607,7 +2587,7 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
+  "id": "number",
   "saleId": "string",
   "bookId": "string",
   "quantity": 0,
@@ -2619,7 +2599,7 @@ This operation does not require authentication
 
 | Name     | Type   | Required | Restrictions | Description |
 | -------- | ------ | -------- | ------------ | ----------- |
-| id       | string | false    | none         | none        |
+| id       | number | false    | none         | none        |
 | saleId   | string | false    | none         | none        |
 | bookId   | string | false    | none         | none        |
 | quantity | number | false    | none         | none        |

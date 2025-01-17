@@ -22,10 +22,10 @@ export class BookRepository {
     };
   }
 
-  findById(id: string): Book | undefined {
+  findById(id: number): Book | undefined {
     return books.find((book) => book.id === id);
   }
-  findBooksByAuthors(authorIds: string[], page: number, limit: number) {
+  findBooksByAuthors(authorIds: number[], page: number, limit: number) {
     const booksByAuthors = books.filter((book) =>
       book.authors.some((authorId) => authorIds.includes(authorId))
     );
@@ -47,7 +47,7 @@ export class BookRepository {
       },
     };
   }
-  findBooksByCategories(categoryIds: string[], page: number, limit: number) {
+  findBooksByCategories(categoryIds: number[], page: number, limit: number) {
     const booksByCategories = books.filter((book) =>
       book.categories.some((categoryId) => categoryIds.includes(categoryId))
     );
@@ -75,7 +75,7 @@ export class BookRepository {
     books.push(book);
   }
 
-  update(id: string, updated: Partial<Book>): Book | undefined {
+  update(id: number, updated: Partial<Book>): Book | undefined {
     const index = books.findIndex((book) => book.id === id);
     if (index !== -1) {
       books[index] = { ...books[index], ...updated };
@@ -84,7 +84,7 @@ export class BookRepository {
     return undefined;
   }
 
-  delete(id: string): boolean {
+  delete(id: number): boolean {
     const index = books.findIndex((book) => book.id === id);
     if (index !== -1) {
       books.splice(index, 1);
