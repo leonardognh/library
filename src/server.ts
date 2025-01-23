@@ -1,5 +1,5 @@
 import express from "express";
-import bodyParser from "body-parser";
+import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "../swagger.json";
 import authorRoutes from "./routes/author.routes";
@@ -11,8 +11,11 @@ import saleRoutes from "./routes/sale.routes";
 
 const app = express();
 
-// Middleware
-app.use(bodyParser.json());
+// CORS Middleware
+app.use(cors());
+
+// Middleware para JSON
+app.use(express.json());
 
 // Swagger setup
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -30,6 +33,7 @@ app.get("/", (req, res) => {
   res.send("Bem-vindo à API da Livraria!");
 });
 
+// Porta e inicialização do servidor
 const PORT = 3000;
 
 app.listen(PORT, () => {
