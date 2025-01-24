@@ -29,14 +29,14 @@ export class BookRepository {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    let filteredBooks = books;
+    let filtered = books;
     if (filter) {
-      filteredBooks = books.filter((book) =>
+      filtered = books.filter((book) =>
         book.title.toLowerCase().includes(filter.toLowerCase())
       );
     }
 
-    const paginated = filteredBooks.slice(startIndex, endIndex);
+    const paginated = filtered.slice(startIndex, endIndex);
 
     const data = paginated.map((book) => ({
       ...book,
@@ -48,8 +48,8 @@ export class BookRepository {
       data,
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(books.length / limit),
-        totalItems: books.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }

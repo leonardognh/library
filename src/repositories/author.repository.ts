@@ -19,8 +19,8 @@ export class AuthorRepository {
       data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(authors.length / limit),
-        totalItems: authors.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }

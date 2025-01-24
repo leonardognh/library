@@ -18,8 +18,8 @@ export class CustomerRepository {
       data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(customers.length / limit),
-        totalItems: customers.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }

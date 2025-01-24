@@ -19,8 +19,8 @@ export class CategoryRepository {
       data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(categories.length / limit),
-        totalItems: categories.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }
