@@ -21,13 +21,13 @@ export class AuthorController {
     if (author) {
       res.json(author);
     } else {
-      res.status(404).send("Author not found");
+      res.status(404).json({ message: "Author not found" });
     }
   };
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("Author created");
+    res.status(201).json({ message: "Author created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -35,15 +35,15 @@ export class AuthorController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("Author not found");
+      res.status(404).json({ message: "Author not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("Author deleted");
+      res.status(200).json({ message: "Author deleted" });
     } else {
-      res.status(404).send("Author not found");
+      res.status(404).json({ message: "Author not found" });
     }
   };
 }

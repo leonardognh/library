@@ -20,13 +20,13 @@ export class ItemSaleController {
     if (itemSale) {
       res.json(itemSale);
     } else {
-      res.status(404).send("ItemSale not found");
+      res.status(404).json({ message: "ItemSale not found" });
     }
   };
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("ItemSale created");
+    res.status(201).json({ message: "ItemSale created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -34,15 +34,15 @@ export class ItemSaleController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("ItemSale not found");
+      res.status(404).json({ message: "ItemSale not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("ItemSale deleted");
+      res.status(200).json({ message: "ItemSale deleted" });
     } else {
-      res.status(404).send("ItemSale not found");
+      res.status(404).json({ message: "ItemSale not found" });
     }
   };
 }

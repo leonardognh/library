@@ -21,7 +21,7 @@ export class BookController {
     if (book) {
       res.json(book);
     } else {
-      res.status(404).send("Book not found");
+      res.status(404).json({ message: "Book not found" });
     }
   };
 
@@ -50,7 +50,7 @@ export class BookController {
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("Book created");
+    res.status(201).json({ message: "Book created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -58,15 +58,15 @@ export class BookController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("Book not found");
+      res.status(404).json({ message: "Book not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("Book deleted");
+      res.status(200).json({ message: "Book deleted" });
     } else {
-      res.status(404).send("Book not found");
+      res.status(404).json({ message: "Book not found" });
     }
   };
 }

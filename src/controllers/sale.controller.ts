@@ -21,13 +21,13 @@ export class SaleController {
     if (sale) {
       res.json(sale);
     } else {
-      res.status(404).send("Sale not found");
+      res.status(404).json({ message: "Sale not found" });
     }
   };
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("Sale created");
+    res.status(201).json({ message: "Sale created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -35,15 +35,15 @@ export class SaleController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("Sale not found");
+      res.status(404).json({ message: "Sale not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("Sale deleted");
+      res.status(200).json({ message: "Sale deleted" });
     } else {
-      res.status(404).send("Sale not found");
+      res.status(404).json({ message: "Sale not found" });
     }
   };
 }

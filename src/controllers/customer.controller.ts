@@ -21,13 +21,13 @@ export class CustomerController {
     if (customer) {
       res.json(customer);
     } else {
-      res.status(404).send("Customer not found");
+      res.status(404).json({ message: "Customer not found" });
     }
   };
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("Customer created");
+    res.status(201).json({ message: "Customer created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -35,15 +35,15 @@ export class CustomerController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("Customer not found");
+      res.status(404).json({ message: "Customer not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("Customer deleted");
+      res.status(200).json({ message: "Customer deleted" });
     } else {
-      res.status(404).send("Customer not found");
+      res.status(404).json({ message: "Customer not found" });
     }
   };
 }

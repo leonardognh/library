@@ -20,13 +20,13 @@ export class CategoryController {
     if (category) {
       res.json(category);
     } else {
-      res.status(404).send("Category not found");
+      res.status(404).json({ message: "Category not found" });
     }
   };
 
   create = (req: Request, res: Response): void => {
     this.service.create(req.body);
-    res.status(201).send("Category created");
+    res.status(201).json({ message: "Category created" });
   };
 
   update = (req: Request, res: Response): void => {
@@ -34,15 +34,15 @@ export class CategoryController {
     if (updated) {
       res.json(updated);
     } else {
-      res.status(404).send("Category not found");
+      res.status(404).json({ message: "Category not found" });
     }
   };
 
   remove = (req: Request, res: Response): void => {
     if (this.service.delete(Number(req.params.id))) {
-      res.status(200).send("Category deleted");
+      res.status(200).json({ message: "Category deleted" });
     } else {
-      res.status(404).send("Category not found");
+      res.status(404).json({ message: "Category not found" });
     }
   };
 }
