@@ -72,6 +72,7 @@ export class SaleRepository {
   }
 
   create(sale: Sale): void {
+    sale.id = this.generateNewId();
     sales.push(sale);
   }
 
@@ -91,5 +92,11 @@ export class SaleRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      sales.length > 0 ? Math.max(...sales.map((sale) => sale.id)) : 0;
+
+    return maxId + 1;
   }
 }

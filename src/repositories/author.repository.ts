@@ -26,6 +26,7 @@ export class AuthorRepository {
   }
 
   create(author: Author): void {
+    author.id = this.generateNewId();
     authors.push(author);
   }
 
@@ -45,5 +46,11 @@ export class AuthorRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      authors.length > 0 ? Math.max(...authors.map((author) => author.id)) : 0;
+
+    return maxId + 1;
   }
 }

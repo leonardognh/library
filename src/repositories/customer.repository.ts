@@ -22,6 +22,7 @@ export class CustomerRepository {
   }
 
   create(customer: Customer): void {
+    customer.id = this.generateNewId();
     customers.push(customer);
   }
 
@@ -41,5 +42,13 @@ export class CustomerRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      customers.length > 0
+        ? Math.max(...customers.map((customer) => customer.id))
+        : 0;
+
+    return maxId + 1;
   }
 }

@@ -49,6 +49,7 @@ export class ItemSaleRepository {
   }
 
   create(itemSale: ItemSale): void {
+    itemSale.id = this.generateNewId();
     itemSales.push(itemSale);
   }
 
@@ -68,5 +69,13 @@ export class ItemSaleRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      itemSales.length > 0
+        ? Math.max(...itemSales.map((itemSale) => itemSale.id))
+        : 0;
+
+    return maxId + 1;
   }
 }

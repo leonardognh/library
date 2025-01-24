@@ -24,8 +24,8 @@ export class CategoryRepository {
   findByIds(categoryIds: number[]) {
     return categories.filter((category) => categoryIds.includes(category.id));
   }
-
   create(category: Category): void {
+    category.id = this.generateNewId();
     categories.push(category);
   }
 
@@ -45,5 +45,13 @@ export class CategoryRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      categories.length > 0
+        ? Math.max(...categories.map((category) => category.id))
+        : 0;
+
+    return maxId + 1;
   }
 }

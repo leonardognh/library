@@ -109,6 +109,7 @@ export class BookRepository {
     };
   }
   create(book: Book): void {
+    book.id = this.generateNewId();
     books.push(book);
   }
 
@@ -128,5 +129,11 @@ export class BookRepository {
       return true;
     }
     return false;
+  }
+  private generateNewId() {
+    const maxId =
+      books.length > 0 ? Math.max(...books.map((book) => book.id)) : 0;
+
+    return maxId + 1;
   }
 }
