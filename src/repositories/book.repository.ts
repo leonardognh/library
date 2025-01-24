@@ -25,13 +25,20 @@ export class BookRepository {
     return this.categoryRepository.findByIds(categoryIds);
   }
 
-  findAll(page: number, limit: number) {
+  findAll(page: number, limit: number, filter?: string) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const paginatedSales = books.slice(startIndex, endIndex);
+    let filteredBooks = books;
+    if (filter) {
+      filteredBooks = books.filter((book) =>
+        book.title.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
 
-    const data = paginatedSales.map((book) => ({
+    const paginated = filteredBooks.slice(startIndex, endIndex);
+
+    const data = paginated.map((book) => ({
       ...book,
       category: this.getCategoriesByIds(book.categories),
       author: this.getAuthorsByIds(book.authors),

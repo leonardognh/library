@@ -4,12 +4,19 @@ import { Author } from "../models/author.model";
 const authors: Author[] = Authors;
 
 export class AuthorRepository {
-  findAll(page: number, limit: number) {
+  findAll(page: number, limit: number, filter?: string) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    let filtered = authors;
+    if (filter) {
+      filtered = authors.filter((author) =>
+        author.name.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return {
-      data: authors.slice(startIndex, endIndex),
+      data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(authors.length / limit),

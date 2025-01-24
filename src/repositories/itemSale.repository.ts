@@ -17,9 +17,9 @@ export class ItemSaleRepository {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const paginatedSales = itemSales.slice(startIndex, endIndex);
+    const paginated = itemSales.slice(startIndex, endIndex);
 
-    const data = paginatedSales.map((itemSale) => ({
+    const data = paginated.map((itemSale) => ({
       ...itemSale,
       book: this.getBookById(itemSale.bookId),
     }));

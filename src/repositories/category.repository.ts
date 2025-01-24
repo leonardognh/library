@@ -4,12 +4,19 @@ import { Category } from "../models/category.model";
 const categories: Category[] = Categories;
 
 export class CategoryRepository {
-  findAll(page: number, limit: number) {
+  findAll(page: number, limit: number, filter?: string) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    let filtered = categories;
+    if (filter) {
+      filtered = categories.filter((category) =>
+        category.description.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return {
-      data: categories.slice(startIndex, endIndex),
+      data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(categories.length / limit),

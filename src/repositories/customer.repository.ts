@@ -3,12 +3,19 @@ import { Customer } from "../models/customer.model";
 const customers: Customer[] = [];
 
 export class CustomerRepository {
-  findAll(page: number, limit: number) {
+  findAll(page: number, limit: number, filter?: string) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    let filtered = customers;
+    if (filter) {
+      filtered = customers.filter((customer) =>
+        customer.name.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return {
-      data: customers.slice(startIndex, endIndex),
+      data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(customers.length / limit),

@@ -11,8 +11,9 @@ export class AuthorController {
   getAll = (req: Request, res: Response): void => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+    const filter = req.query.filter as string;
 
-    const result = this.service.getAll(page, limit);
+    const result = this.service.getAll(page, limit, filter);
     res.json(result);
   };
 

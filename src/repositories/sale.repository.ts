@@ -41,9 +41,9 @@ export class SaleRepository {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const paginatedSales = sales.slice(startIndex, endIndex);
+    const paginated = sales.slice(startIndex, endIndex);
 
-    const data = paginatedSales.map((sale) => ({
+    const data = paginated.map((sale) => ({
       ...sale,
       customer: this.getCustomerById(sale.customerId),
       itemsSale: this.getItemsBySaleId(sale.id),

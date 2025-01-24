@@ -8,8 +8,8 @@ export class CustomerService {
     this.repository = repository;
   }
 
-  getAll(page: number, limit: number) {
-    return this.repository.findAll(page, limit);
+  getAll(page: number, limit: number, filter?: string) {
+    return this.repository.findAll(page, limit, filter);
   }
 
   getById(id: number): Customer | undefined {
