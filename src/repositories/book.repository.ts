@@ -71,30 +71,39 @@ export class BookRepository {
     limit: number,
     filter?: string
   ) {
+    if (!authorIds || authorIds.length === 0) {
+      return {
+        data: [],
+        pagination: { currentPage: page, totalPages: 0, totalItems: 0 },
+      };
+    }
     const booksByAuthors = books.filter((book) =>
       book.authors.some((authorId) => authorIds.includes(authorId))
     );
-    const booksWithAuthors = booksByAuthors.map((book) => {
-      const detailedAuthors = this.authorRepository.findByIds(book.authors);
-      return { ...book, authors: detailedAuthors };
-    });
 
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
+    const booksWithAuthors = booksByAuthors.map((book) => ({
+      ...book,
+      authors: this.authorRepository.findByIds(book.authors) || [],
+    }));
 
-    let filtered = booksWithAuthors;
+    let filteredBooks = booksWithAuthors;
     if (filter) {
-      filtered = booksWithAuthors.filter((book) =>
-        book.title.toLowerCase().includes(filter.toLowerCase())
+      const lowerFilter = filter.toLowerCase().trim();
+      filteredBooks = booksWithAuthors.filter((book) =>
+        book.title.toLowerCase().includes(lowerFilter)
       );
     }
 
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
+
     return {
-      data: filtered.slice(startIndex, endIndex),
+      data: paginatedBooks,
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(filtered.length / limit),
-        totalItems: filtered.length,
+        totalPages: Math.ceil(filteredBooks.length / limit),
+        totalItems: filteredBooks.length,
       },
     };
   }
