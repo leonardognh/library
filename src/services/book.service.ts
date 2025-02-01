@@ -13,12 +13,27 @@ export class BookService {
     return this.repository.findAll(page, limit, filter);
   }
 
-  getAllByAuthors(authorIds: number[], page: number, limit: number) {
-    return this.repository.findBooksByAuthors(authorIds, page, limit);
+  getAllByAuthors(
+    authorIds: number[],
+    page: number,
+    limit: number,
+    filter?: string
+  ) {
+    return this.repository.findBooksByAuthors(authorIds, page, limit, filter);
   }
 
-  getAllByCategories(categoryIds: number[], page: number, limit: number) {
-    return this.repository.findBooksByCategories(categoryIds, page, limit);
+  getAllByCategories(
+    categoryIds: number[],
+    page: number,
+    limit: number,
+    filter?: string
+  ) {
+    return this.repository.findBooksByCategories(
+      categoryIds,
+      page,
+      limit,
+      filter
+    );
   }
 
   getById(id: number): Book | undefined {

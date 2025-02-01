@@ -31,10 +31,11 @@ export class BookController {
       (req.query.authorIds as string)?.split(",").map(Number) || [];
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+    const filter = req.query.filter as string;
 
     console.log({ authorIds, page, limit });
 
-    const result = this.service.getAllByAuthors(authorIds, page, limit);
+    const result = this.service.getAllByAuthors(authorIds, page, limit, filter);
     res.json(result);
   };
   getAllByCategories = (req: Request, res: Response) => {
@@ -42,10 +43,16 @@ export class BookController {
       (req.query.categoryIds as string)?.split(",").map(Number) || [];
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+    const filter = req.query.filter as string;
 
     console.log({ categoryIds, page, limit });
 
-    const result = this.service.getAllByCategories(categoryIds, page, limit);
+    const result = this.service.getAllByCategories(
+      categoryIds,
+      page,
+      limit,
+      filter
+    );
     res.json(result);
   };
 

@@ -65,15 +65,15 @@ export class BookRepository {
     }
     return undefined;
   }
-  findBooksByAuthors(authorIds: number[], page: number, limit: number) {
+  findBooksByAuthors(
+    authorIds: number[],
+    page: number,
+    limit: number,
+    filter?: string
+  ) {
     const booksByAuthors = books.filter((book) =>
       book.authors.some((authorId) => authorIds.includes(authorId))
     );
-    console.log(
-      "🚀 ~ BookRepository ~ findBooksByAuthors ~ booksByAuthors:",
-      booksByAuthors
-    );
-
     const booksWithAuthors = booksByAuthors.map((book) => {
       const detailedAuthors = this.authorRepository.findByIds(book.authors);
       return { ...book, authors: detailedAuthors };
@@ -82,16 +82,28 @@ export class BookRepository {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    let filtered = booksWithAuthors;
+    if (filter) {
+      filtered = booksWithAuthors.filter((book) =>
+        book.title.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return {
-      data: booksWithAuthors.slice(startIndex, endIndex),
+      data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(booksWithAuthors.length / limit),
-        totalItems: booksWithAuthors.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }
-  findBooksByCategories(categoryIds: number[], page: number, limit: number) {
+  findBooksByCategories(
+    categoryIds: number[],
+    page: number,
+    limit: number,
+    filter?: string
+  ) {
     const booksByCategories = books.filter((book) =>
       book.categories.some((categoryId) => categoryIds.includes(categoryId))
     );
@@ -106,12 +118,19 @@ export class BookRepository {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    let filtered = booksWithCategories;
+    if (filter) {
+      filtered = booksWithCategories.filter((book) =>
+        book.title.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return {
-      data: booksWithCategories.slice(startIndex, endIndex),
+      data: filtered.slice(startIndex, endIndex),
       pagination: {
         currentPage: page,
-        totalPages: Math.ceil(booksWithCategories.length / limit),
-        totalItems: booksWithCategories.length,
+        totalPages: Math.ceil(filtered.length / limit),
+        totalItems: filtered.length,
       },
     };
   }
