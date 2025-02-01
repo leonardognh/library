@@ -83,7 +83,8 @@ export class BookRepository {
 
     const booksWithAuthors = booksByAuthors.map((book) => ({
       ...book,
-      authors: this.authorRepository.findByIds(book.authors) || [],
+      category: this.getCategoriesByIds(book.categories),
+      author: this.getAuthorsByIds(book.authors),
     }));
 
     let filteredBooks = booksWithAuthors;
@@ -126,7 +127,8 @@ export class BookRepository {
 
     const booksWithCategories = booksByCategories.map((book) => ({
       ...book,
-      categories: this.categoryRepository.findByIds(book.categories) || [],
+      category: this.getCategoriesByIds(book.categories),
+      author: this.getAuthorsByIds(book.authors),
     }));
 
     let filteredBooks = booksWithCategories;
